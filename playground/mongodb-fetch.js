@@ -28,6 +28,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp?useNewUrlParser=true', (e
     //     console.log('cant fetch',err);
     // })
 
+    //simple find by user's name
     db.collection('Users').find({
         name:'ralf'
     })
