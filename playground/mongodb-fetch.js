@@ -41,6 +41,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp?useNewUrlParser=true', (e
         }
     );
 
+    //do not close, otherwise the find will not execute
     //client.close();
 
 });
