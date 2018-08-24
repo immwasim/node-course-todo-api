@@ -4,11 +4,15 @@ const request = require("supertest");
 const {app} = require('./../server');
 const {Todo} = require('./../models/todo');
 
+const {ObjectID} = require('mongodb');
+
 const seedData = [
     {
+        _id: new ObjectID(),
         text:'First to do'
     },
     {
+        _id: new ObjectID(),
         text:'second to do'
     } 
 ]
@@ -78,4 +82,31 @@ describe('GET /todos',() => {
         .end(done);
     });
 
+});
+
+describe('GET /todos/:id', () => {
+    it('should return a todo data by id ', (done) => {
+        request(app)
+            .get(`/todos/${seedData[0]._id.toHexString()}`)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todo.text).toBe(seedData[0].text);
+            })
+            .end(done);
+    });
+
+    it('return 404 if todo not found', (done) => {
+        var hex = new ObjectID().toHexString();
+        request(app)
+        .get(`/todos/${hex}`)
+        .expect(404)
+        .end(done);
+    });
+
+    it('return 404 for non object ids', (done) => {
+        request(app)
+        .get(`/todos/1212`)
+        .expect(404)
+        .end(done);
+    });
 });
