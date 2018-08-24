@@ -110,4 +110,3 @@ describe('GET /todos/:id', () => {
         .end(done);
     });
 });
-//mongodb://wasim:IdGazNotDypcay4@ds131942.mlab.com:31942/node-todo-api-db
