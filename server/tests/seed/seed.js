@@ -21,20 +21,28 @@ const users = [
     {
         _id: utwoid,
         email: 'rrsddddr@was.com',
-        password: 'User2Pass'
+        password: 'User2Pass',
+        tokens: [
+            {
+                access: 'auth',
+                token: jwt.sign({ _id: utwoid, access: 'auth' }, '123123').toString()
+            }
+        ]
     }
 ];
 
 const seedData = [
     {
         _id: new ObjectID(),
-        text: 'First to do'
+        text: 'First to do',
+        _creator:uoneid
     },
     {
         _id: new ObjectID(),
         text: 'second to do',
         completed: true,
-        completedAt: 333
+        completedAt: 333,
+        _creator:utwoid
     }
 ]
 
